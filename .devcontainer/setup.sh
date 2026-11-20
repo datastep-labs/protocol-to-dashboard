@@ -31,6 +31,8 @@ if Rscript -e "options(repos = c(CRAN = '$repo'), Ncpus = 4); p <- $pkgs; instal
 else
   ok=0; say "R packages: the install did not finish; see $log"
 fi
+# the packages the image ships (knitr, ...) to the same snapshot: a new xfun with an old knitr does not load
+Rscript -e "options(repos = c(CRAN = '$repo'), Ncpus = 4); update.packages(ask = FALSE, checkBuilt = TRUE)" >>"$log" 2>&1 || say "R packages: the update did not finish; see $log"
 Rscript -e "p <- $pkgs; m <- p[!vapply(p, requireNamespace, TRUE, quietly = TRUE)]; if (length(m)) { cat('missing:', m, '\n'); quit(status = 1) }" >>"$log" 2>&1 || { ok=0; say "R packages: some are missing; see $log"; }
 
 if bash tools/get-data.sh >>"$log" 2>&1; then say "Data: the CDISC pilot SDTM in data/sdtm"; else ok=0; say "Data: the download did not finish; run bash tools/get-data.sh"; fi
