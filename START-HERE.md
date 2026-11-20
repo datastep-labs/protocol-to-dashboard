@@ -5,6 +5,9 @@ pilot study. You work in VS Code, in your browser. The book: https://protocol-to
 
 ## Stop 0: wait for the setup
 
+VS Code asks: *Do you trust the authors of the files in this folder?* This folder is the book's lab: click
+**Trust Folder & Continue**. Without it the terminal does not start.
+
 The first time, the setup installs the R packages and downloads the data. The terminal shows the progress and ends with
 **Ready. Open START-HERE.md.** This takes a few minutes. Later starts are fast.
 
