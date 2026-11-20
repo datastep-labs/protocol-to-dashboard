@@ -36,7 +36,7 @@ Rscript -e "options(repos = c(CRAN = '$repo'), Ncpus = 4); update.packages(ask =
 Rscript -e "p <- $pkgs; m <- p[!vapply(p, requireNamespace, TRUE, quietly = TRUE)]; if (length(m)) { cat('missing:', m, '\n'); quit(status = 1) }" >>"$log" 2>&1 || { ok=0; say "R packages: some are missing; see $log"; }
 
 # the Python modules of Sapling's R engine tools (sapling doctor checks them)
-if python3 -m pip install --quiet pyyaml openpyxl >>"$log" 2>&1; then say "Python modules: pyyaml, openpyxl"; else ok=0; say "Python modules: the install did not finish; see $log"; fi
+if python3 -m pip install --quiet pyyaml openpyxl jsonschema >>"$log" 2>&1; then say "Python modules: pyyaml, openpyxl, jsonschema"; else ok=0; say "Python modules: the install did not finish; see $log"; fi
 
 if bash tools/get-data.sh >>"$log" 2>&1; then say "Data: the CDISC pilot SDTM in data/sdtm"; else ok=0; say "Data: the download did not finish; run bash tools/get-data.sh"; fi
 
