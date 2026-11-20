@@ -26,7 +26,7 @@ cd pilot
 sapling round --note "the first draft"
 ```
 
-The scorecard: the agent score, and your readiness. Chapter 4 of the book explains each line.
+The scorecard: the agent score, and your readiness. Chapter 5 of the book explains each line.
 
 ## Stop 3: the next thing to do
 
@@ -34,8 +34,8 @@ The scorecard: the agent score, and your readiness. Chapter 4 of the book explai
 sapling next
 ```
 
-From here, follow the book from chapter 5, or start an AI agent in this folder (`claude`) and ask it to work the loop
-of `AGENTS.md` (chapter 7).
+From here, follow the book from chapter 6, or start an AI agent in this folder (`claude`) and ask it to work the loop
+of `AGENTS.md` (chapter 6).
 
 ## Stop 4: the plan as a page
 
