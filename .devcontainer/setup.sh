@@ -14,7 +14,9 @@ repo="https://packagemanager.posit.co/cran/__linux__/${codename}/2026-11-15"
 say "R: $(R --version | head -1); packages from $repo"
 
 sysreqs="libx11-dev libcurl4-openssl-dev libssl-dev cmake make libuv1-dev libfreetype6-dev zlib1g-dev libjpeg-dev
-  libpng-dev libtiff-dev libwebp-dev libicu-dev libfontconfig1-dev libfribidi-dev libharfbuzz-dev libxml2-dev"
+  libpng-dev libtiff-dev libwebp-dev libicu-dev libfontconfig1-dev libfribidi-dev libharfbuzz-dev libxml2-dev
+  libnss3 libatk-bridge2.0-0 libgbm1 libasound2t64 libxkbcommon0 libxcomposite1 libxdamage1 libxrandr2 libpango-1.0-0
+  libcairo2 libcups2t64 libxfixes3 libdrm2"
 if sudo -n apt-get -qq update >>"$log" 2>&1 && sudo -n apt-get -y -qq install $sysreqs >>"$log" 2>&1; then
   say "System libraries: installed"
 else
@@ -37,6 +39,10 @@ Rscript -e "p <- $pkgs; m <- p[!vapply(p, requireNamespace, TRUE, quietly = TRUE
 
 # the Python modules of Sapling's R engine tools (sapling doctor checks them)
 if python3 -m pip install --quiet pyyaml openpyxl jsonschema >>"$log" 2>&1; then say "Python modules: pyyaml, openpyxl, jsonschema"; else ok=0; say "Python modules: the install did not finish; see $log"; fi
+
+# a headless Chrome for the dashboard's gate (shinytest2 and chromote read CHROMOTE_CHROME)
+chrome=$(npx -y @puppeteer/browsers install chrome-headless-shell@stable --path "$HOME/.cache/chrome-hs" 2>>"$log" | tail -1 | awk '{print $2}')
+if [ -x "$chrome" ]; then echo "CHROMOTE_CHROME=$chrome" >> "$HOME/.Renviron"; say "Chrome (headless, for the dashboard's gate): installed"; else ok=0; say "Chrome: the install did not finish; see $log"; fi
 
 if bash tools/get-data.sh >>"$log" 2>&1; then say "Data: the CDISC pilot SDTM in data/sdtm"; else ok=0; say "Data: the download did not finish; run bash tools/get-data.sh"; fi
 
