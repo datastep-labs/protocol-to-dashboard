@@ -21,6 +21,9 @@ else
   say "System libraries: apt-get did not finish; see $log"
 fi
 
+# Deriv (a dependency of admiral) is archived on CRAN: no snapshot has it, so it comes from the CRAN archive first
+Rscript -e "if (!requireNamespace('Deriv', quietly = TRUE)) install.packages('https://cran.r-project.org/src/contrib/Archive/Deriv/Deriv_4.2.0.tar.gz', repos = NULL, type = 'source')" >>"$log" 2>&1 || say "Deriv: the archive install did not finish; see $log"
+
 pkgs='c("admiral","dplyr","tidyr","rlang","jsonlite","haven","cards","cardx","broom","emmeans","parameters","car","mmrm","survival","shiny","bslib","processx","callr","shinytest2","openssl","httpuv","evaluate","yaml","testthat","styler","lintr","pkgload","ps","chromote","survminer")'
 ok=1
 if Rscript -e "options(repos = c(CRAN = '$repo'), Ncpus = 4); p <- $pkgs; install.packages(setdiff(p, rownames(installed.packages())))" >>"$log" 2>&1; then

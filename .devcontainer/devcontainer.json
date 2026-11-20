@@ -2,11 +2,19 @@
   "name": "From Protocol to Dashboard",
   "image": "ghcr.io/rocker-org/devcontainer/r-ver:4.4",
   "features": {
-    "ghcr.io/devcontainers/features/node:1": { "version": "22" },
-    "ghcr.io/devcontainers/features/python:1": { "version": "3.12" },
-    "ghcr.io/rocker-org/devcontainer-features/quarto-cli:1": { "version": "release" }
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "22"
+    },
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "3.12"
+    },
+    "ghcr.io/rocker-org/devcontainer-features/quarto-cli:1": {
+      "version": "release"
+    }
   },
-  "hostRequirements": { "cpus": 4 },
+  "hostRequirements": {
+    "cpus": 4
+  },
   "postCreateCommand": "bash .devcontainer/setup.sh",
   "customizations": {
     "vscode": {
@@ -17,11 +25,20 @@
         "-RDebugger.r-debugger"
       ],
       "settings": {
-        "workbench.editorAssociations": { "*.md": "vscode.markdown.preview.editor" },
+        "workbench.editorAssociations": {
+          "*.md": "vscode.markdown.preview.editor"
+        },
         "workbench.editor.empty.hint": "hidden",
-        "terminal.integrated.defaultProfile.linux": "bash"
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "security.workspace.trust.enabled": false,
+        "chat.disableAIFeatures": true,
+        "workbench.secondarySideBar.defaultVisibility": "hidden"
       }
     },
-    "codespaces": { "openFiles": ["START-HERE.md"] }
+    "codespaces": {
+      "openFiles": [
+        "START-HERE.md"
+      ]
+    }
   }
 }
