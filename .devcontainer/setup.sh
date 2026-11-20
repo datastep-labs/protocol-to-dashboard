@@ -16,7 +16,7 @@ say "R: $(R --version | head -1); packages from $repo"
 sysreqs="libx11-dev libcurl4-openssl-dev libssl-dev cmake make libuv1-dev libfreetype6-dev zlib1g-dev libjpeg-dev
   libpng-dev libtiff-dev libwebp-dev libicu-dev libfontconfig1-dev libfribidi-dev libharfbuzz-dev libxml2-dev
   libnss3 libatk-bridge2.0-0 libgbm1 libasound2t64 libxkbcommon0 libxcomposite1 libxdamage1 libxrandr2 libpango-1.0-0
-  libcairo2 libcups2t64 libxfixes3 libdrm2"
+  libcairo2 libcups2t64 libxfixes3 libdrm2 jq"
 if sudo -n apt-get -qq update >>"$log" 2>&1 && sudo -n apt-get -y -qq install $sysreqs >>"$log" 2>&1; then
   say "System libraries: installed"
 else
